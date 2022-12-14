@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_13_014950) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_14_003553) do
+  create_table "crew_members", force: :cascade do |t|
+    t.string "name"
+    t.string "job_title"
+    t.integer "production_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["production_id"], name: "index_crew_members_on_production_id"
+  end
+
   create_table "pets", force: :cascade do |t|
     t.string "name"
     t.string "breed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "productions", force: :cascade do |t|
+    t.string "title"
+    t.string "genre"
+    t.integer "budget"
+    t.string "image"
+    t.string "director"
+    t.boolean "ongoing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -23,4 +43,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_014950) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "crew_members", "productions"
 end
